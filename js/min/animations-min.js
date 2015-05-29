@@ -1,0 +1,1 @@
+$(function(){$("#tweet-submit").hide(),$("#char-count").hide(),$("#tweet-content textarea").click(function(t){t.preventDefault(),$("#tweet-submit").show(),$("#char-count").show()})});
