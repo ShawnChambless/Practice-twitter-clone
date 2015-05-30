@@ -3,10 +3,25 @@ $(function() {
     $('#tweet-submit').hide().prop('disabled', true);
     $('#char-count').hide();
 
-    $('#tweet-content textarea').focus(function() {
+    $('.tweet-actions').hide();
+
+    $('.tweet').mouseenter(function() {
+        $(this).find($('.tweet-actions')).fadeIn(100, 'linear');
+    });
+
+    $('.tweet').mouseleave(function() {
+        $('.tweet-actions').fadeOut(20, 'linear');
+    });
+
+
+
+    $('#tweet-content').focusin(function() {
         $('#tweet-submit').show();
         $('#char-count').show();
-        $(this).height($(this).height() * 2);
+        $('#tweet-content textarea').css('height', '5em').css('max-height', '5em');
+    });
+    $('#tweet-content textarea').focusout(function() {
+        $(this).css('height', '2.5em');
     });
 
     $('#tweet-controls').click(function() {
@@ -16,16 +31,26 @@ $(function() {
         tweet.find('.username').html('@SMC');
         tweet.find('.tweet-text').html($('#tweet-content textarea').val());
         $('#stream').prepend(tweet);
-        $('#tweet-content textarea').val('');
+        $('#tweet-content textarea').val('').css('height', '2.5em');
         $('#tweet-submit').hide().prop('disabled', true);
         $('#char-count').hide();
-        $('#tweet-content textarea').css('height', '2.5em');
+        $('.tweet-actions').fadeOut(20, 'linear');
+        $('.tweet').mouseenter(function() {
+            $(this).find($('.tweet-actions')).fadeIn(100, 'linear');
+        });
+        $('.tweet').mouseleave(function() {
+            $('.tweet-actions').hide();
+        });
+
     });
 
 
     $('#tweet-content textarea').keydown(function() {
+
         var remaining = 140 - $('#tweet-content textarea').val().length;
         $('#char-count').html(remaining);
+
+
 
         if (remaining <= 10) {
             $('#char-count').css('color', '#d40d12');
