@@ -1,9 +1,6 @@
 $(function() {
-
-    $('#tweet-submit').hide().prop('disabled', true);
-    $('#char-count').hide();
-
-    $('.tweet-actions').hide();
+    $('#tweet-submit, #char-count, .tweet-actions, .stats, .reply').hide();
+    $('#tweet-submit').prop('disabled', true);
 
     $('.tweet').mouseenter(function() {
         $(this).find($('.tweet-actions')).fadeIn(100, 'linear');
@@ -12,8 +9,6 @@ $(function() {
     $('.tweet').mouseleave(function() {
         $('.tweet-actions').fadeOut(20, 'linear');
     });
-
-
 
     $('#tweet-content').focusin(function() {
         $('#tweet-submit').show();
@@ -40,6 +35,9 @@ $(function() {
         });
         $('.tweet').mouseleave(function() {
             $('.tweet-actions').hide();
+        });
+        $('.tweet').click(function() {
+            $(this).find($('.reply, .stats')).fadeIn(100, 'linear');
         });
 
     });
@@ -68,11 +66,9 @@ $(function() {
         }
     });
 
-
-
-
-
-
+    $('.tweet').click(function() {
+        $(this).find($('.reply, .stats')).fadeIn(100, 'linear');
+    });
 
 
 
